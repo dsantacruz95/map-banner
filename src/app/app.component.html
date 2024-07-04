@@ -6,6 +6,7 @@
       <h3 class="ag-color fw-bolder mb-0 text-uppercase">Adrenaline Gamer</h3>
     </div>
   </div>
+  @if(errorMessage == ''){
   <div
     class="w-100 d-flex justify-start-center pad-text-ag pt-5 pb-4 flex-column"
   >
@@ -46,4 +47,16 @@
       </div>
     </ul>
   </div>
+  } @else {
+  <div
+    class="w-100 d-flex justify-start-center pad-text-ag pt-5 pb-4 flex-column"
+  >
+    <h6 class="ag-color-sec text-uppercase fw-bold">Oh no!</h6>
+    <hr />
+    <p class="text-light text-justify">
+      {{ errorMessage }}
+    </p>
+    <p class="text-light text-end">Darkmencito 😇</p>
+  </div>
+  }
 </div>
