@@ -1,3 +1,26 @@
-.ag-color{
-    color: rgba(118, 183, 67, 1);
+.ag-color {
+  color: rgba(118, 183, 67, 1);
+}
+
+.ag-color-sec {
+  color: #c52128;
+}
+
+.ag-color-title{
+    color: #A5A4A2;
+}
+
+.flex-gap {
+  gap: 10px;
+}
+
+.w-list {
+  width: 20em;
+}
+
+@media (min-width: 720px) {
+  .pad-text-ag {
+    padding-left: 20em;
+    padding-right: 20em;
+  }
 }

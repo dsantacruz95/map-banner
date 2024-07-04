@@ -1,13 +1,50 @@
-<div id="mapbanner" class="bg-dark w-100 vh-100">
-  <div class="container">
-    <div class="ag-color w-100 text-center text-uppercase py-5">
-      <h1 class="fw-bolder">Map Banner</h1>
-      <h3 class="fw-bolder">Adrenaline Gamer</h3>
+<div id="mapbanner" class="container">
+  <div class="w-100 text-center pt-5 d-flex justify-content-center flex-gap">
+    <img src="../assets/logoag.png" alt="logo" width="150em" />
+    <div class="d-flex flex-column justify-content-center align-items-start">
+      <h2 class="ag-color-title fw-bolder mb-0">Map Banner</h2>
+      <h3 class="ag-color fw-bolder mb-0 text-uppercase">Adrenaline Gamer</h3>
     </div>
-    <div class="text-center">
-      <div *ngFor="let map of listMaps | orderBy: 'name'">
-        <p class="ag-color">{{ map.name }}</p>
+  </div>
+  <div
+    class="w-100 d-flex justify-start-center pad-text-ag pt-5 pb-4 flex-column"
+  >
+    <h6 class="ag-color-sec text-uppercase fw-bold">What's this?</h6>
+    <hr />
+    <p class="text-light text-justify">
+      I developed this webpage to enhance the competitive experience in
+      Adrenaline Gamer and Half-Life Deathmatch by streamlining the map
+      selection process. Players can vote to eliminate maps until only one
+      remains, ensuring a fair and agreed-upon final map.
+    </p>
+    <p class="text-light text-justify">
+      This tool speeds up decision-making, reduces disputes, and supports
+      efficient match management. It promotes fair play and strategic planning,
+      aiming to elevate the quality of gameplay in these communities.
+      Ultimately, it creates a more enjoyable and professional tournament
+      experience.
+    </p>
+    <p class="text-light text-end">
+      Darkmencito 😇
+    </p>
+  </div>
+  <div class="d-flex w-100 justify-content-center text-center pb-5">
+    <ul class="list-group w-list">
+      <div *ngFor="let map of listMaps | orderBy : 'name'">
+        <li
+          class="list-group-item list-group-item-action fw-bolder"          
+          [attr.role]="!map.disabled || map.winner ? 'button' : null"
+          [ngClass]="{
+            'list-group-item-light': !map.disabled && !map.winner,
+            'list-group-item-danger': map.disabled,
+            'ag-color': !map.disabled && !map.winner,
+            'list-group-item-success': map.winner
+          }"
+          (click)="disableMap(map)"
+        >
+          {{ map.name }}
+        </li>
       </div>
-    </div>
+    </ul>
   </div>
 </div>
