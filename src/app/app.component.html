@@ -24,15 +24,13 @@
       Ultimately, it creates a more enjoyable and professional tournament
       experience.
     </p>
-    <p class="text-light text-end">
-      Darkmencito 😇
-    </p>
+    <p class="text-light text-end">Darkmencito 😇</p>
   </div>
   <div class="d-flex w-100 justify-content-center text-center pb-5">
     <ul class="list-group w-list">
       <div *ngFor="let map of listMaps | orderBy : 'name'">
         <li
-          class="list-group-item list-group-item-action fw-bolder"          
+          class="list-group-item list-group-item-action fw-bolder"
           [attr.role]="!map.disabled || map.winner ? 'button' : null"
           [ngClass]="{
             'list-group-item-light': !map.disabled && !map.winner,
@@ -43,6 +41,7 @@
           (click)="disableMap(map)"
         >
           {{ map.name }}
+          {{ map.disabled ? "(banned)" : map.winner ? "(WINNER!)" : "" }}
         </li>
       </div>
     </ul>
