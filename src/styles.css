@@ -1,7 +1,7 @@
 @import "../node_modules/@fontsource/roboto/index.css";
 
-#mapbanner {
-  font-family: "Roboto";
+.container {
+  font-family: "Roboto" !important;
 }
 
 body {
@@ -18,4 +18,85 @@ hr {
   margin-left: 45px;
   margin: 1em 0;
   opacity: unset;
+}
+
+.ag-color {
+  color: #76b743;
+}
+
+.ag-color-sec {
+  color: #c52128;
+}
+
+.ag-color-title {
+  color: #a5a4a2;
+}
+
+.flex-gap {
+  gap: 10px;
+}
+
+.w-list {
+  width: 20em;
+}
+
+@media (min-width: 720px) {
+  .pad-text-ag {
+    padding-left: 25em;
+    padding-right: 25em;
+  }
+}
+
+.w-ag-custom {
+  width: 100%;
+}
+
+@media (min-width: 720px) {
+  .w-ag-custom {
+    width: 30em;
+  }
+}
+
+.btn-outline-success,
+.btn-outline-danger {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-success:hover,
+.btn-outline-success:focus,
+.btn-outline-success:active {
+  background-color: rgba(118, 183, 67, 1);
+  color: white;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus,
+.btn-outline-danger:active {
+  background-color: #c52128;
+  color: white;
+}
+
+.swal-button--confirm {
+  background-color: #76b743 !important;
+}
+
+.list-group-item-ag{
+  background-color: transparent;
+  border: 0.1em solid #76b743;  
+  color: white;
+}
+
+.list-group-item-action:hover {
+  background-color: #c52128 !important;
+  color: white !important;
+}
+
+.list-group-item-danger{
+  background-color: #c52128;
+  color: white;
+}
+
+.list-group-item-success {
+  background-color: #76b743;
+  color: white;
 }

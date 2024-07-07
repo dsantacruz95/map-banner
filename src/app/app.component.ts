@@ -1,48 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ElementRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Map } from './models/map';
-import { OrderByPipe } from './utils/ordering.pipe';
-import { NgForOf, NgClass } from '@angular/common';
-import { io } from 'socket.io-client';
-
+import { HeadermatchComponent } from './components/headermatch/headermatch.component';
+import { JoinmatchComponent } from './components/joinmatch/joinmatch.component';
+import { ParamsDataService } from './shared/ParamsDataService.service';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, OrderByPipe, NgForOf, NgClass],
+  imports: [RouterOutlet, HeadermatchComponent, JoinmatchComponent, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'map-banner';
-  listMaps: Map[] = [];
-  errorMessage = '';
-  private socket: any;
-  private urlParams = new URLSearchParams(window.location.search);
-  private matchParam = this.urlParams.get('match');
+  matchParam = '';
+  showListView!: boolean;
+  inputElement!: HTMLInputElement;
 
-  constructor() { }
-
-  ngOnInit() {
-    if (!this.matchParam) {
-      this.errorMessage = 'Invalid URL or the match code is not present 🤦';
-      return;
-    }
-
-    this.socket = io('http://192.168.18.235:3000');
-    this.socket.on('request-guid', () => {
-      this.socket.emit('provide-guid', this.matchParam);
-    });
-    this.socket.on('maps', (maps: Map[]) => {
-      this.listMaps = maps;
-      if (!this.listMaps || this.listMaps.length === 0) {
-        this.errorMessage = 'No maps found for this match 😺';
-      }
+  constructor(private dataService: ParamsDataService, private elementRef: ElementRef) {
+    this.dataService.showView$.subscribe(value => {
+      this.showListView = value;
+      this.ngAfterViewInit();
     });
   }
 
-  disableMap(map: Map) {
-    if (map.disabled || map.winner)
-      return;
-    this.socket.emit('disable-map', {mapId: map.id, matchId: this.matchParam});
+  ngAfterViewInit() {
+    this.inputElement = this.elementRef.nativeElement.querySelector('.match-param');
+    if (this.inputElement) {
+      this.inputElement.focus();
+    }
+  }
+
+  JoinMatchView() {
+    this.showListView = true;    
+    this.dataService.updateMatchParam(this.matchParam);
+    this.dataService.updateShowView(this.showListView);
   }
 }
